@@ -2,16 +2,16 @@ let Promise = require("bluebird");
 let https = require("https");
 let { exec } = require("child_process");
 
-function _extractInfo(url){
-
-    return { session: url.split("#")[1].split("?")[0],
-            score: parseInt(url.split(" ")[0])
-    };
-}
-
 module.exports = {
-    updateScore: function (url) {
-        let {session , score} = _extractInfo(url);
+    name: "math-battle",
+    serviceDescription: "updates your score of math-battle game in telegram.\n",
+    callDescription: "",
+    argumentInfo: "",
+
+    updateScore: function (score, url) {
+
+        let session = url.split("#")[1].split("?")[0];
+        score = parseInt(score);
 
         function promiseFromChildProcess(child) {
             return new Promise(function (resolve, reject) {
